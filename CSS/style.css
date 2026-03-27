@@ -1,0 +1,70 @@
+
+#pressedKey-container {
+    margin-left: 25%;
+    margin-top: 5%;
+    border: solid black 3px;
+    display: inline-block;
+    justify-content: center;
+    width: 50vw;
+    height: 35vw;
+    text-align: center;
+}
+
+#end-message {
+    color: black;
+    position: absolute;
+    left: 34.5%;
+    top: 30%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 4vw;
+    z-index: 1000;
+}
+
+#restart {
+    position: absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    color: gray;
+    font-size: 1.5vw;
+    top: 45%;
+    left: 43%;
+    z-index: 1000;
+}
+
+.output-container {
+    margin-top: 0%;
+    display: flex;
+    gap: 1vw;
+    justify-content: center;
+}
+
+.outputs {
+    display: flex;
+    border: solid black 3px;
+    width: 5vw; 
+    height: 5vw;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+}
+
+.stats {
+    position: absolute;
+    width: 8vw;
+    height: 10vw;
+    left: 76vw;
+    top: 10vw;
+    border: solid black 3px;
+    display: block;
+    font-size: 1vw;
+}
+
+.stats * {
+    padding-left: 0.5vw;
+}
+
+#stats-button {
+    position: absolute;
+    top: 21vw;
+    right: 18.3vw;
+}
+

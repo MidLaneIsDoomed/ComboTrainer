@@ -7,11 +7,28 @@
     <link rel="stylesheet" href="/CSS/style.css">
 </head>
 <body>
-    
-    <input id="pressedKey" type="text" placeholder="do E + Q + R">
+    <div id="pressedKey-container">   
+        <p id="end-message"></p>
+        <p id="restart"></p>
 
-    <p id="output"></p>
+    </div>
 
+    <div class="output-container">
+        <div class="outputs" id="Eoutput">E</div>
+        <div class="outputs" id="Qoutput">Q</div>
+        <div class="outputs" id="Routput">R</div>
+    </div>
+
+    <div class="stats">
+        <h3>Stats</h3>
+        <p id="points"></p>
+    </div>
+
+    <button id="stats-button" onclick="resetStats()">Reset</button>
+
+
+
+ 
     <script src="/JS/logic.js"></script>
 
 </body>
