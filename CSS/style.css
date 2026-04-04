@@ -1,17 +1,45 @@
+body {  
+    background-image: url(/images/background-img.jpg);
+}
 
 #pressedKey-container {
     margin-left: 25%;
     margin-top: 5%;
-    border: solid black 3px;
+    border: solid white 3px;
     display: inline-block;
     justify-content: center;
     width: 50vw;
     height: 35vw;
     text-align: center;
+
+}
+
+
+#clickBlocker {
+    /* position: absolute; */
+    top: 0%;
+    width: 100%;
+    height: 100%;
+    cursor:auto;
+    outline: none;
+    display: none;
+    z-index: 2;
+}
+
+
+#pressBorder {
+    /* position: absolute; */
+    top: 0%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    outline: none;
+    display: block;
+    z-index: 1;
 }
 
 #end-message {
-    color: black;
+    color: white;
     position: absolute;
     left: 34.5%;
     top: 30%;
@@ -39,7 +67,7 @@
 
 .outputs {
     display: flex;
-    border: solid black 3px;
+    border: solid black 1px;
     width: 5vw; 
     height: 5vw;
     justify-content: center;
@@ -53,9 +81,10 @@
     height: 10vw;
     left: 76vw;
     top: 10vw;
-    border: solid black 3px;
+    border: solid white 3px;
     display: block;
     font-size: 1vw;
+    color: white;
 }
 
 .stats * {

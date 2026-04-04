@@ -7,21 +7,30 @@
     <link rel="stylesheet" href="/CSS/style.css">
 </head>
 <body>
-    <div id="pressedKey-container">   
+    <div id="pressedKey-container">  
+
         <p id="end-message"></p>
         <p id="restart"></p>
 
+        <div id="pressBorder" tabindex="0"></div> 
+        <div id="clickBlocker"></div>
+
     </div>
 
+
     <div class="output-container">
+
         <div class="outputs" id="Eoutput">E</div>
         <div class="outputs" id="Qoutput">Q</div>
         <div class="outputs" id="Routput">R</div>
+
     </div>
 
     <div class="stats">
+
         <h3>Stats</h3>
         <p id="points"></p>
+
     </div>
 
     <button id="stats-button" onclick="resetStats()">Reset</button>

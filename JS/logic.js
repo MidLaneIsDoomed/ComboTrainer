@@ -3,6 +3,9 @@ let position = 0;
 
 const pressedKey = document.getElementById("pressedKey-container");
 
+const clickArea = document.getElementById("pressBorder");
+const clickBlocker = document.getElementById("clickBlocker")
+
 const actions = [
     () => document.getElementById("Eoutput").style.backgroundColor = "#32CD32",
     () => document.getElementById("Qoutput").style.backgroundColor = "#32CD32",
@@ -15,7 +18,7 @@ function resetStats() {
     document.getElementById("points").innerHTML = ""
 }
 
-document.addEventListener("keydown", (event) => {
+clickArea.addEventListener("keydown", (event) => {
     if (event.key === airblade[position]) {
 
         actions[position]();
@@ -25,6 +28,8 @@ document.addEventListener("keydown", (event) => {
       if (position === airblade.length) {
         console.log("airblade completed!");
         position = 0;
+
+        clickArea.style.display = "none";
 
         document.getElementById("end-message").innerHTML = "Combo Completed"
         document.getElementById("restart").innerHTML = "Press SPACE to restart"
@@ -44,8 +49,11 @@ document.addEventListener("keydown", (event) => {
             el.style.backgroundColor = "#ff0000";
         });
     }
+  });
 
-    if(event.key === " ") {
+     if(event2.key === " ") {
+
+        clickArea.style.display = "block";
 
         document.querySelectorAll(".outputs").forEach(el => {
             el.style.backgroundColor = "#ff0000";
@@ -54,8 +62,6 @@ document.addEventListener("keydown", (event) => {
         document.getElementById("restart").innerHTML = ""
         });
     }
-  });
-
 
   
 
