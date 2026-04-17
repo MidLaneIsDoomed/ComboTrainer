@@ -8,6 +8,7 @@ body {
     border: solid white 3px;
     display: inline-block;
     justify-content: center;
+    align-content: center;
     width: 50vw;
     height: 35vw;
     text-align: center;
@@ -38,6 +39,45 @@ body {
     z-index: 1;
 }
 
+.dummies {
+    height: 15vw;
+    background-color: rgba(128, 0, 0, 0.493);
+    border-radius: 20vw;
+    position: absolute;
+    padding: 4vw 4vw 4vw 4vw;
+    transition: 0.05s ease-out;
+    outline: none;
+}
+
+#first-dummy {
+    top: 30%;
+    left: 30.5%;
+}
+
+#second-dummy {
+    top: 25%;
+    right: 30.5%;
+    display: none;
+}
+
+#second-dummy-F {
+    top: 25%;
+    right: 30.5%;
+    display: block;
+}
+
+#first-dummy:hover {
+    transform: scale(1.04);
+}
+
+#second-dummy:hover {
+    transform: scale(1.04);
+}
+
+#second-dummy-F:hover {
+    transform: scale(1.04);
+}
+
 #end-message {
     color: white;
     position: absolute;
@@ -61,18 +101,36 @@ body {
 .output-container {
     margin-top: 0%;
     display: flex;
-    gap: 1vw;
+    gap: 3vw;
     justify-content: center;
+}
+
+.output12 {
+    display: flex;
+}
+
+#first-output {
+    gap: 1vw;
+}
+
+#second-output {
+    gap: 1vw;
+}
+
+.combo-timer {
+    color: rgb(0, 153, 255);
+    font-size: 5vw;
 }
 
 .outputs {
     display: flex;
-    border: solid black 1px;
+    border: solid white 1px;
     width: 5vw; 
     height: 5vw;
     justify-content: center;
     align-items: center;
     font-size: 2vw;
+    color: rgba(255, 255, 255, 0.671);
 }
 
 .stats {
