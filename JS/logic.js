@@ -14,10 +14,14 @@ const actions = [
 
 let points = 0;
     
+
+/* Reset your stats */
 function resetStats() {
     document.getElementById("points").innerHTML = ""
+    points = 0;
 }
 
+/* The combo itself */
 clickArea.addEventListener("keydown", (event) => {
     if (event.key === airblade[position]) {
 
@@ -32,9 +36,9 @@ clickArea.addEventListener("keydown", (event) => {
         clickArea.style.display = "none";
 
         document.getElementById("end-message").innerHTML = "Combo Completed"
-        document.getElementById("restart").innerHTML = "Press SPACE to restart"
+        document.getElementById("restart").innerHTML = "Press SPACE to try again"
 
-        document.getElementById("points").innerHTML = points++;
+        document.getElementById("points").innerHTML = ++points;
 
         document.querySelectorAll(".outputs").forEach(el => { 
             el.style.backgroundColor = "#32CD32";
@@ -51,17 +55,23 @@ clickArea.addEventListener("keydown", (event) => {
     }
   });
 
+/* Resets the the combo */
+  document.addEventListener("keydown", (event2) => {
      if(event2.key === " ") {
 
         clickArea.style.display = "block";
 
+        clickArea.focus();
+
         document.querySelectorAll(".outputs").forEach(el => {
             el.style.backgroundColor = "#ff0000";
 
-            document.getElementById("end-message").innerHTML = ""
+        document.getElementById("end-message").innerHTML = ""
         document.getElementById("restart").innerHTML = ""
+
         });
     }
+});
 
   
 
