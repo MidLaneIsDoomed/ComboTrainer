@@ -11,25 +11,18 @@ const clickAreaF = document.getElementById("second-dummy-F");
 
 let comboTimer = document.getElementById("combo-timer");
 let windowOpen = false;
-let windowClosed = false;
+
 
 let timer;
+let time = 1.00;
 
 function startTimer() {
-    let time = 1.00;
+
 
     timer = setInterval(() => {
         time -= 0.01;
 
         comboTimer.innerText = time.toFixed(2);
-
-        if(time <= 0.17 && !windowOpen) {
-            windowOpen = true;
-        }
-
-        if(time <= 0.00 && !windowClosed) {
-            windowClosed = true;
-        }
 
         if(time <= 0) {
             clearInterval(timer);
@@ -72,7 +65,7 @@ clickArea.addEventListener("keydown", (event1) => {
 
                          clickArea2.addEventListener("keydown", (event) => {
 
-                            if (!windowOpen) return;
+                            if(time <= 0.17 && time >= 0) { 
 
                             if (event.key === airblade[position2]) {
 
@@ -95,18 +88,35 @@ clickArea.addEventListener("keydown", (event1) => {
                                     el.style.backgroundColor = "#32CD32";
                                 });
 
+                                
+
                                pauseTimer();
                             }
+
                         
+                            } 
+                            
                             } else {
-                            position2 = 0;
+
+                             position2 = 0;
+
+                                resetCombo();
                             
                                 secondOuput.forEach(el => {
                                     el.style.backgroundColor = "#ff0000";
                                 });
-                            }
-                        });
 
+                                 console.log("combo failed")
+                                    document.getElementById("end-message").innerHTML = "Combo Failed"
+                                    document.getElementById("restart").innerHTML = "Press SPACE to try again"
+
+                                    firstOuput.forEach(el => {
+                                        el.style.backgroundColor = "#ff0000";
+                                });
+                            }
+
+                        });
+                        
                 }
             })
 
@@ -129,7 +139,7 @@ let position2 = 0;
 const clickArea2 = document.getElementById("second-dummy");
 
 const secondOuput = document.querySelectorAll("#second-output div")
-const firstOuput = document.querySelectorAll("first-output div")
+const firstOuput = document.querySelectorAll("#first-output div")
 
 const actions2 = [
     () => document.getElementById("2Eoutput").style.backgroundColor = "#32CD32",
@@ -149,26 +159,28 @@ function resetStats() {
 }
 
 /* Resets the the combo */
-  document.addEventListener("keydown", (event2) => {
-     if(event2.key === " ") {
 
-        clickArea2.setAttribute("tabindex", "0");
+function resetCombo() {
+    document.addEventListener("keydown", (event2) => {
+        if(event2.key === " ") {
 
-        secondOuput.forEach(el => {
-            el.style.backgroundColor = "#ff0000";
-     });
+            clickArea2.setAttribute("tabindex", "0");
 
-        firstOuput.forEach(el => {
-            el.style.backgroundColor = "#ff0000";
+            secondOuput.forEach(el => {
+                el.style.backgroundColor = "#ff0000";
+        });
+
+            firstOuput.forEach(el => {
+                el.style.backgroundColor = "#ff0000";
 
 
-     });
+        });
 
-        document.getElementById("end-message").innerHTML = ""
-        document.getElementById("restart").innerHTML = ""
-    }
-});
-
+            document.getElementById("end-message").innerHTML = ""
+            document.getElementById("restart").innerHTML = ""
+        }
+    });
+}
 /* Stops focus if you dont hover on second dummy */
 function mouseOut2() {
     clickArea2.blur();
