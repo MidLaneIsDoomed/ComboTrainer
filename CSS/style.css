@@ -117,7 +117,7 @@ body {
     gap: 1vw;
 }
 
-.combo-timer {
+#combo-timer {
     color: rgb(0, 153, 255);
     font-size: 5vw;
 }
