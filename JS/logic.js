@@ -12,12 +12,12 @@ const clickAreaF = document.getElementById("second-dummy-F");
 let comboTimer = document.getElementById("combo-timer");
 let windowOpen = false;
 
-
 let timer;
 let time = 1.00;
 
 function startTimer() {
 
+    clearInterval(timer); // ✅ fix
 
     timer = setInterval(() => {
         time -= 0.01;
@@ -27,13 +27,30 @@ function startTimer() {
         if(time <= 0) {
             clearInterval(timer);
             comboTimer.innerText = "0.00";
+
+            position2 = 0;
+            position = 0;
+
+            resetCombo();
+        
+            secondOuput.forEach(el => {
+                el.style.backgroundColor = "#ff0000";
+            });
+
+            console.log("combo failedTimer")
+            document.getElementById("end-message").innerHTML = "Combo Failed"
+            document.getElementById("restart").innerHTML = "Press SPACE to try again"
+
+            firstOuput.forEach(el => {
+                el.style.backgroundColor = "#ff0000";
+            });
         }
     },10)
 }
 
-    function pauseTimer() {
-        clearInterval(timer);
-    }
+function pauseTimer() {
+    clearInterval(timer);
+}
 
 const clickArea = document.getElementById("first-dummy");
 
@@ -45,7 +62,6 @@ document.getElementById("second-dummy-F").onmouseout = function() {mouseOutF()};
 
 const output = document.querySelectorAll("#first-output div")
 
-
 clickArea.addEventListener("keydown", (event1) => {
     if(event1.key === eqFlash[position]) {
         actions[position]();
@@ -55,7 +71,7 @@ clickArea.addEventListener("keydown", (event1) => {
 
             console.log("1completed");
 
-            clickAreaF.addEventListener("keydown", (eventF)=> {
+            clickAreaF.onkeydown = (eventF)=> { 
                 if(eventF.key === "f") {
                     Fkey.style.backgroundColor = "#32CD32"
                     clickAreaF.style.display = "none"
@@ -63,75 +79,82 @@ clickArea.addEventListener("keydown", (event1) => {
 
                     startTimer();
 
-                         clickArea2.addEventListener("keydown", (event) => {
+                    clickArea2.onkeydown = (event) => {
 
-                            if(time <= 0.17 && time >= 0) { 
+                        if(time <= 0.2 && time >= 0) { 
 
                             if (event.key === airblade[position2]) {
 
                                 actions2[position2]();
                                 position2++;
                                 
+                                if (position2 === airblade.length) {
+                                    console.log("airblade completed!");
+                                    position2 = 0;
+                                    position = 0;
 
-                            if (position2 === airblade.length) {
-                                console.log("airblade completed!");
-                                position2 = 0;
+                                    clickArea2.removeAttribute("tabindex");
+                                    clickArea.removeAttribute("tabindex");
 
-                                clickArea2.removeAttribute("tabindex");
-
-                                document.getElementById("end-message").innerHTML = "Combo Completed"
-                                document.getElementById("restart").innerHTML = "Press SPACE to try again"
-
-                                document.getElementById("points").innerHTML = "Score: " + ++points;
-
-                                secondOuput.forEach(el => { 
-                                    el.style.backgroundColor = "#32CD32";
-                                });
-
-                                
-
-                               pauseTimer();
-                            }
-
-                        
-                            } 
-                            
-                            } else {
-
-                             position2 = 0;
-
-                                resetCombo();
-                            
-                                secondOuput.forEach(el => {
-                                    el.style.backgroundColor = "#ff0000";
-                                });
-
-                                 console.log("combo failed")
-                                    document.getElementById("end-message").innerHTML = "Combo Failed"
+                                    document.getElementById("end-message").innerHTML = "Combo Completed"
                                     document.getElementById("restart").innerHTML = "Press SPACE to try again"
 
-                                    firstOuput.forEach(el => {
-                                        el.style.backgroundColor = "#ff0000";
-                                });
-                            }
+                                    document.getElementById("points").innerHTML = "Score: " + ++points;
 
-                        });
-                        
+                                    secondOuput.forEach(el => { 
+                                        el.style.backgroundColor = "#32CD32";
+
+                                        
+                                    });
+                                    
+                                    pauseTimer();
+                                }
+
+                            } 
+                            
+                        } else {
+
+                            position2 = 0;
+                            position = 0;
+
+                            pauseTimer();
+                            
+                            secondOuput.forEach(el => {
+                                el.style.backgroundColor = "#ff0000";
+                            });
+
+                            console.log("combo failed")
+                            document.getElementById("end-message").innerHTML = "Combo Failed"
+                            document.getElementById("restart").innerHTML = "Press SPACE to try again"
+
+                            firstOuput.forEach(el => {
+                                el.style.backgroundColor = "#ff0000";
+                            });
+                        }
+
+                    };
                 }
-            })
+            }
 
         }
 
     } else {
-         position = 0;
+
+        pauseTimer();
+
+        position = 0;
+        position2 = 0;
+
+        console.log("combo failed")
+        document.getElementById("end-message").innerHTML = "Combo Failed"
+        document.getElementById("restart").innerHTML = "Press SPACE to try again"
         
-            output.forEach(el => {
-                el.style.backgroundColor = "#ff0000";
-            }); 
+        output.forEach(el => {
+            el.style.backgroundColor = "#ff0000";
+        }); 
 
     }
-    });
-
+});
 
 const airblade = ["e", "q", "r" ]
 let position2 = 0;
@@ -144,7 +167,7 @@ const firstOuput = document.querySelectorAll("#first-output div")
 const actions2 = [
     () => document.getElementById("2Eoutput").style.backgroundColor = "#32CD32",
     () => document.getElementById("2Qoutput").style.backgroundColor = "#32CD32",
-    () => document.getElementById("2Routput").style.backgroundColor = "32CD32"
+    () => document.getElementById("2Routput").style.backgroundColor = "#32CD32" 
 ];
 
 let points = 0;
@@ -160,27 +183,45 @@ function resetStats() {
 
 /* Resets the the combo */
 
+let resetListenerAdded = false; 
+
 function resetCombo() {
-    document.addEventListener("keydown", (event2) => {
-        if(event2.key === " ") {
 
-            clickArea2.setAttribute("tabindex", "0");
+    time = 1;
+    clearInterval(timer);
+    comboTimer.innerText = "1.00";
 
-            secondOuput.forEach(el => {
-                el.style.backgroundColor = "#ff0000";
+    if (!resetListenerAdded) {
+        document.addEventListener("keydown", (event2) => {
+            if(event2.key === " ") {
+
+                clickArea2.setAttribute("tabindex", "0");
+                clickArea.setAttribute("tabindex", "0")
+
+                clickArea2.style.display = "none";
+                clickAreaF.style.display = "block";
+
+                time = 1;
+                clearInterval(timer);
+                comboTimer.innerText = "1.00";
+
+                secondOuput.forEach(el => {
+                    el.style.backgroundColor = "#ff0000";
+                });
+
+                firstOuput.forEach(el => {
+                    el.style.backgroundColor = "#ff0000";
+                });
+
+                document.getElementById("end-message").innerHTML = "";
+                document.getElementById("restart").innerHTML = "";
+            }
         });
 
-            firstOuput.forEach(el => {
-                el.style.backgroundColor = "#ff0000";
-
-
-        });
-
-            document.getElementById("end-message").innerHTML = ""
-            document.getElementById("restart").innerHTML = ""
-        }
-    });
+        resetListenerAdded = true;
+    }
 }
+
 /* Stops focus if you dont hover on second dummy */
 function mouseOut2() {
     clickArea2.blur();
@@ -190,7 +231,6 @@ function mouseOut2() {
 function mouseOver2() {
     clickArea2.focus();
 };
-
 
 function mouseOver() {
     clickArea.focus();
