@@ -17,7 +17,7 @@ let time = 1.00;
 
 function startTimer() {
 
-    clearInterval(timer); // ✅ fix
+    clearInterval(timer);
 
     timer = setInterval(() => {
         time -= 0.01;
@@ -247,3 +247,5 @@ function mouseOverF() {
 function mouseOutF() {
     clickAreaF.blur();
 }
+
+resetCombo();
